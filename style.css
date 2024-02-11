@@ -17,3 +17,29 @@ h1{
     border: 1px solid gray;
     display: inline-block;
 }
+
+.player1, .player2{
+    position: relative;
+}
+
+.player1:after{
+    content: "\1F6E1";
+    font-size: 50px;
+    line-height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.player2:after{
+    content: "\2694";
+    font-size: 50px;
+    line-height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
