@@ -19,23 +19,35 @@ function checkWinner(){
     squares = $('.square');
     let sequenceP1 = [];
     let sequenceP2 = [];
+    let sequenceP1Html = [];
+    let sequenceP2Html  = [];
     for (let square of squares) {
         if($(square).hasClass('player1')){
             sequenceP1.push(square.id);
+            sequenceP1Html.push(square);
         } 
         if($(square).hasClass('player2')){
             sequenceP2.push(square.id);
+            sequenceP2Html.push(square);
         } 
     }
     for (let seq of isWin) {
         if(sequenceP1 == seq.toString()){
             gameOver = true;
-            alert("Vitória do Player 1");
+            layoutWinner(sequenceP1Html);
+            alert("Vitória do Player 1");        
         }
         else if(sequenceP2 == seq.toString()){
             gameOver = true;
-            alert("Vitória do Player 2");
+            layoutWinner(sequenceP2Html);
+            alert("Vitória do Player 2");       
         }
     }
     
+}
+
+function layoutWinner(sequence){
+    for (let seq of sequence) {
+        $(seq).addClass('victory');
+    }
 }
