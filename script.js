@@ -3,6 +3,11 @@ let symbol = ['player1', 'player2'];
 let gameOver = false;
 let isWin = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 
+$('.newGame').click(function(){
+    playerTime = 1;
+    gameOver = false;
+    $('.square').removeClass('player1 player2 victory');
+});
 $('.square').click(function () {
     position = $(this);
     if(gameOver){
@@ -19,35 +24,30 @@ function checkWinner(){
     squares = $('.square');
     let sequenceP1 = [];
     let sequenceP2 = [];
-    let sequenceP1Html = [];
-    let sequenceP2Html  = [];
     for (let square of squares) {
         if($(square).hasClass('player1')){
-            sequenceP1.push(square.id);
-            sequenceP1Html.push(square);
+            sequenceP1.push(parseInt(square.id));
         } 
         if($(square).hasClass('player2')){
-            sequenceP2.push(square.id);
-            sequenceP2Html.push(square);
+            sequenceP2.push(parseInt(square.id));
         } 
     }
     for (let seq of isWin) {
-        if(sequenceP1 == seq.toString()){
+        if(seq.every(elem => sequenceP1.includes(elem))){
             gameOver = true;
-            layoutWinner(sequenceP1Html);
+            layoutWinner(seq);
             alert("Vitória do Player 1");        
         }
-        else if(sequenceP2 == seq.toString()){
+        else if(seq.every(elem => sequenceP2.includes(elem))){
             gameOver = true;
-            layoutWinner(sequenceP2Html);
+            layoutWinner(seq);
             alert("Vitória do Player 2");       
         }
-    }
-    
+    } 
 }
 
-function layoutWinner(sequence){
-    for (let seq of sequence) {
-        $(seq).addClass('victory');
+function layoutWinner(sequenceWinner){
+    for (let seq of sequenceWinner) {
+        $('#'+seq).addClass('victory');
     }
 }
